@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReciPal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>ReciPal</h1>
+    <nav id="main-nav" class="main-nav">
+      <button type="button" data-view="recipes" data-i18n="nav.recipes"></button>
+      <button type="button" data-view="ingredients" data-i18n="nav.ingredients"></button>
+      <button type="button" data-view="tags" data-i18n="nav.tags"></button>
+    </nav>
+    <button type="button" id="btn-open-shopping" class="btn shopping-button" data-i18n-title="shopping.open" data-i18n-aria-label="shopping.open">
+      🛒 <span data-i18n="nav.shopping"></span><span id="nav-shopping-badge" class="nav-badge" hidden></span>
+    </button>
+    <select id="lang-select" class="lang-select" data-i18n-aria-label="app.language" data-i18n-title="app.language"></select>
+  </header>
+
+  <main>
+    <!-- レシピ -->
+    <section id="view-recipes" class="view">
+      <div class="toolbar">
+        <input id="search" type="search" data-i18n-placeholder="search.placeholder">
+        <select id="category-filter"></select>
+        <select id="recipe-tag-filter" data-i18n-aria-label="filter.recipeTags" data-i18n-title="filter.recipeTags"></select>
+        <select id="recipe-ingredient-tag-filter" data-i18n-aria-label="filter.ingredientTags" data-i18n-title="filter.ingredientTags"></select>
+        <button id="btn-new-recipe" class="btn primary" data-i18n="app.newRecipe"></button>
+      </div>
+      <p id="result-count" class="muted"></p>
+      <div id="recipe-list" class="recipe-grid"></div>
+      <p id="empty" class="empty" data-i18n="list.empty" hidden></p>
+    </section>
+
+    <!-- 材料 -->
+    <section id="view-ingredients" class="view" hidden>
+      <div class="toolbar">
+        <input id="ingredient-search" type="search" data-i18n-placeholder="ingredient.searchPlaceholder">
+        <select id="ingredient-tag-filter"></select>
+        <button id="btn-import-ingredients" class="btn" data-i18n="ingredient.import" data-i18n-title="ingredient.importHint"></button>
+        <button id="btn-new-ingredient" class="btn primary" data-i18n="ingredient.new"></button>
+      </div>
+      <p id="ingredient-count" class="muted"></p>
+      <div id="ingredient-list" class="item-list"></div>
+      <p id="ingredient-empty" class="empty" data-i18n="ingredient.empty" hidden></p>
+    </section>
+
+    <!-- タグ -->
+    <section id="view-tags" class="view" hidden>
+      <div class="tag-section" data-tag-type="recipe">
+        <div class="section-header">
+          <h2 data-i18n="tag.recipeSection"></h2>
+          <button type="button" class="btn primary small btn-new-tag" data-i18n="tag.newRecipe"></button>
+        </div>
+        <p class="hint" data-i18n="tag.recipeSectionHint"></p>
+        <div class="item-list tag-list"></div>
+        <p class="empty tag-empty" data-i18n="tag.empty" hidden></p>
+      </div>
+
+      <div class="tag-section" data-tag-type="ingredient">
+        <div class="section-header">
+          <h2 data-i18n="tag.ingredientSection"></h2>
+          <button type="button" class="btn primary small btn-new-tag" data-i18n="tag.newIngredient"></button>
+        </div>
+        <p class="hint" data-i18n="tag.ingredientSectionHint"></p>
+        <div class="item-list tag-list"></div>
+        <p class="empty tag-empty" data-i18n="tag.empty" hidden></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 買い物リスト（右からスライドして開くパネル） -->
+  <dialog id="shopping-drawer" class="drawer" data-i18n-aria-label="shopping.title">
+    <div class="drawer-body">
+      <header class="dialog-header">
+        <div>
+          <h2 data-i18n="shopping.title"></h2>
+          <p id="shopping-count" class="muted" hidden></p>
+        </div>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <form id="shopping-item-form" class="shopping-item-form" autocomplete="off">
+        <input id="shopping-item-name" maxlength="100" data-i18n-placeholder="shopping.itemPlaceholder">
+        <input id="shopping-item-amount" maxlength="50" data-i18n-placeholder="shopping.amountPlaceholder">
+        <button type="submit" class="btn primary" data-i18n="shopping.addItem"></button>
+      </form>
+
+      <p class="hint shopping-hint" data-i18n="shopping.hint"></p>
+
+      <div id="shopping-recipes" class="shopping-recipes" hidden>
+        <span class="muted" data-i18n="shopping.recipes"></span>
+        <div id="shopping-recipe-list" class="shopping-recipe-list"></div>
+      </div>
+
+      <div id="shopping-list" class="shopping-list"></div>
+      <p id="shopping-empty" class="empty" data-i18n="shopping.empty" hidden></p>
+
+      <div id="shopping-actions" class="shopping-actions">
+        <button type="button" id="btn-shopping-copy" class="btn primary" data-i18n="shopping.copy"></button>
+        <button type="button" id="btn-shopping-clear-all" class="btn danger" data-i18n="shopping.clearAll"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 材料名の入力候補（言語ごとに JS で生成） -->
+  <div id="ingredient-datalists" hidden></div>
+  <datalist id="category-options"></datalist>
+
+  <!-- レシピ詳細 -->
+  <dialog id="detail-dialog">
+    <article class="detail">
+      <header class="dialog-header">
+        <div>
+          <span id="detail-category" class="tag"></span>
+          <h2 id="detail-title"></h2>
+        </div>
+        <button class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+      <p id="detail-description"></p>
+      <div id="detail-tags" class="chips" hidden></div>
+      <nav id="detail-variants" class="variant-tabs" role="tablist" hidden></nav>
+      <p id="detail-meta" class="muted"></p>
+      <p id="detail-fallback" class="notice" hidden></p>
+      <h3 data-i18n="detail.ingredients"></h3>
+      <ul id="detail-ingredients" class="ingredients"></ul>
+      <h3 data-i18n="detail.steps"></h3>
+      <ol id="detail-steps" class="steps"></ol>
+      <footer class="dialog-footer">
+        <button id="btn-delete" class="btn danger" data-i18n="detail.delete"></button>
+        <button id="btn-add-to-shopping" class="btn" data-i18n="shopping.addToList"></button>
+        <button id="btn-edit" class="btn primary" data-i18n="detail.edit"></button>
+      </footer>
+    </article>
+  </dialog>
+
+  <!-- レシピの追加・編集 -->
+  <dialog id="form-dialog">
+    <form id="recipe-form" class="recipe-form" method="dialog" novalidate>
+      <header class="dialog-header">
+        <h2 id="form-title"></h2>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <div class="edit-lang">
+        <span class="edit-lang-label" data-i18n="form.editLanguage"></span>
+        <div id="edit-lang-tabs" class="edit-lang-tabs" role="tablist"></div>
+        <p class="hint" data-i18n="form.editLanguageHint"></p>
+      </div>
+
+      <div class="field">
+        <span class="field-label"><span data-i18n="form.title"></span> <span class="required">*</span></span>
+        <div id="title-fields" data-lang-group></div>
+      </div>
+
+      <label><span data-i18n="form.category"></span>
+        <input name="category" list="category-options" maxlength="50" data-i18n-placeholder="form.categoryPlaceholder">
+      </label>
+
+      <div class="field">
+        <span class="field-label" data-i18n="form.description"></span>
+        <div id="description-fields" data-lang-group></div>
+      </div>
+
+      <div class="field">
+        <span class="field-label" data-i18n="form.recipeTags"></span>
+        <div id="recipe-tag-picker" class="tag-picker" data-tag-type="recipe"></div>
+      </div>
+
+      <section class="variants">
+        <h3 class="variants-heading" data-i18n="variant.section"></h3>
+        <p class="hint" data-i18n="variant.hint"></p>
+        <div id="variant-tabs" class="variant-tabs" role="tablist"></div>
+        <div id="variant-editors"></div>
+      </section>
+
+      <p id="form-error" class="error" hidden></p>
+
+      <footer class="dialog-footer">
+        <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
+        <button type="submit" class="btn primary" data-i18n="form.save"></button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- バリエーション 1 つ分の編集欄 -->
+  <template id="variant-template">
+    <div class="variant-editor">
+      <div class="row">
+        <div class="field">
+          <span class="field-label" data-i18n="variant.label"></span>
+          <div class="variant-label-fields" data-lang-group></div>
+        </div>
+        <label><span data-i18n="form.servings"></span>
+          <input class="v-servings" type="number" min="1" placeholder="2">
+        </label>
+        <label><span data-i18n="form.time"></span>
+          <input class="v-time" type="number" min="1" placeholder="30">
+        </label>
+      </div>
+
+      <fieldset>
+        <legend data-i18n="form.ingredients"></legend>
+        <div class="ingredient-rows"></div>
+        <button type="button" class="btn small btn-add-ingredient" data-i18n="form.addIngredient"></button>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i18n="form.steps"></legend>
+        <div class="step-rows"></div>
+        <button type="button" class="btn small btn-add-step" data-i18n="form.addStep"></button>
+      </fieldset>
+
+      <div class="variant-actions">
+        <button type="button" class="btn small btn-copy-variant" data-i18n="variant.copy"></button>
+        <button type="button" class="btn small danger btn-remove-variant" data-i18n="variant.remove"></button>
+      </div>
+    </div>
+  </template>
+
+  <!-- 材料の追加・編集 -->
+  <dialog id="ingredient-dialog" class="narrow">
+    <form id="ingredient-form" class="recipe-form" method="dialog" novalidate>
+      <header class="dialog-header">
+        <h2 id="ingredient-form-title"></h2>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <div class="edit-lang">
+        <span class="edit-lang-label" data-i18n="form.editLanguage"></span>
+        <div id="ingredient-lang-tabs" class="edit-lang-tabs" role="tablist"></div>
+        <p class="hint" data-i18n="form.editLanguageHint"></p>
+      </div>
+
+      <div class="field">
+        <span class="field-label"><span data-i18n="ingredient.name"></span> <span class="required">*</span></span>
+        <div id="ingredient-name-fields" data-lang-group></div>
+      </div>
+
+      <div class="field">
+        <span class="field-label" data-i18n="ingredient.aliases"></span>
+        <div id="ingredient-alias-fields" data-lang-group></div>
+      </div>
+
+      <div class="field">
+        <span class="field-label" data-i18n="form.ingredientTags"></span>
+        <div id="ingredient-tag-picker" class="tag-picker" data-tag-type="ingredient"></div>
+      </div>
+
+      <div class="field">
+        <label class="check-field"><input type="checkbox" id="ingredient-pantry"> <span data-i18n="ingredient.pantry"></span></label>
+        <p class="hint" data-i18n="ingredient.pantryHint"></p>
+      </div>
+
+      <p id="ingredient-usage" class="muted"></p>
+      <p id="ingredient-form-error" class="error" hidden></p>
+
+      <footer class="dialog-footer">
+        <button type="button" id="btn-delete-ingredient" class="btn danger" data-i18n="common.delete"></button>
+        <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
+        <button type="submit" class="btn primary" data-i18n="form.save"></button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- タグの追加・編集 -->
+  <dialog id="tag-dialog" class="narrow">
+    <form id="tag-form" class="recipe-form" method="dialog" novalidate>
+      <header class="dialog-header">
+        <div>
+          <h2 id="tag-form-title"></h2>
+          <p id="tag-type-label" class="muted"></p>
+        </div>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <div class="edit-lang">
+        <span class="edit-lang-label" data-i18n="form.editLanguage"></span>
+        <div id="tag-lang-tabs" class="edit-lang-tabs" role="tablist"></div>
+        <p class="hint" data-i18n="form.editLanguageHint"></p>
+      </div>
+
+      <div class="field">
+        <span class="field-label"><span data-i18n="tag.name"></span> <span class="required">*</span></span>
+        <div id="tag-name-fields" data-lang-group></div>
+      </div>
+
+      <p id="tag-usage" class="muted"></p>
+      <p id="tag-form-error" class="error" hidden></p>
+
+      <footer class="dialog-footer">
+        <button type="button" id="btn-delete-tag" class="btn danger" data-i18n="common.delete"></button>
+        <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
+        <button type="submit" class="btn primary" data-i18n="form.save"></button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- 通知。popover で最上位レイヤーに出し、開いているダイアログより手前に表示する -->
+  <div id="toast" class="toast" popover="manual" role="status" hidden></div>
+
+  <script src="i18n.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

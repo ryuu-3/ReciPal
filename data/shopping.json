@@ -1,0 +1,486 @@
+{
+  "recipes": [
+    {
+      "recipeId": "sample-misosoup",
+      "variantId": "v1",
+      "times": 1,
+      "title": {
+        "ja": "豆腐とわかめの味噌汁",
+        "zh": "豆腐裙带菜味噌汤"
+      },
+      "label": {},
+      "servings": 2,
+      "addedAt": "2026-10-17T11:56:19.777Z"
+    },
+    {
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "times": 1,
+      "title": {
+        "ja": "トマトときゅうりの中華サラダ",
+        "zh": "番茄黄瓜中式沙拉"
+      },
+      "label": {},
+      "servings": 2,
+      "addedAt": "2026-10-17T11:56:21.253Z"
+    },
+    {
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "times": 1,
+      "title": {
+        "ja": "キーマカレー",
+        "zh": "肉末咖喱"
+      },
+      "label": {},
+      "servings": 2,
+      "addedAt": "2026-10-17T11:56:23.397Z"
+    },
+    {
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "times": 1,
+      "title": {
+        "ja": "基本のチキンカレー",
+        "zh": "基础鸡肉咖喱"
+      },
+      "label": {},
+      "servings": 2,
+      "addedAt": "2026-10-17T11:56:25.270Z"
+    }
+  ],
+  "items": [
+    {
+      "id": "212c97f0-3e16-4a67-90cb-50e9076e03f1",
+      "ingredientId": "a31d0107-2fcc-4483-8675-8a2320fb9627",
+      "name": {
+        "ja": "豆腐",
+        "zh": "豆腐"
+      },
+      "skip": false,
+      "recipeId": "sample-misosoup",
+      "variantId": "v1",
+      "row": 0,
+      "amount": {
+        "ja": "1/2丁",
+        "zh": "半块"
+      }
+    },
+    {
+      "id": "960052b0-a8bc-48c3-b52d-c81479b61247",
+      "ingredientId": "0a0497a2-582f-4665-8b06-9676452f0a33",
+      "name": {
+        "ja": "乾燥わかめ",
+        "zh": "干裙带菜"
+      },
+      "skip": false,
+      "recipeId": "sample-misosoup",
+      "variantId": "v1",
+      "row": 1,
+      "amount": {
+        "ja": "小さじ2",
+        "zh": "2小勺"
+      }
+    },
+    {
+      "id": "e563947c-d127-4069-a4b3-e77e20945ee9",
+      "ingredientId": "54bd29a0-0a9c-4cfd-a858-9351f17688a7",
+      "name": {
+        "ja": "だし汁",
+        "zh": "高汤"
+      },
+      "skip": false,
+      "recipeId": "sample-misosoup",
+      "variantId": "v1",
+      "row": 2,
+      "amount": {
+        "ja": "400ml",
+        "zh": "400毫升"
+      }
+    },
+    {
+      "id": "ab51ab1a-c4e2-457d-a81d-02a04ebabf80",
+      "ingredientId": "f9cce093-e759-4f8e-828b-7a5822176452",
+      "name": {
+        "ja": "味噌",
+        "zh": "味噌"
+      },
+      "skip": true,
+      "recipeId": "sample-misosoup",
+      "variantId": "v1",
+      "row": 3,
+      "amount": {
+        "ja": "大さじ2",
+        "zh": "2大勺"
+      }
+    },
+    {
+      "id": "71050403-715c-4885-8dd1-357318b54ebf",
+      "ingredientId": "6d22447d-56f4-41d3-a843-6c127c5aa906",
+      "name": {
+        "ja": "トマト",
+        "zh": "番茄"
+      },
+      "skip": false,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 0,
+      "amount": {
+        "ja": "1個",
+        "zh": "1个"
+      }
+    },
+    {
+      "id": "559cc779-8b7f-4b9a-9196-b8f781d2fecb",
+      "ingredientId": "4861dcb1-327c-4b42-bbf3-c6e6ce9ed04b",
+      "name": {
+        "ja": "きゅうり",
+        "zh": "黄瓜"
+      },
+      "skip": false,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 1,
+      "amount": {
+        "ja": "1本",
+        "zh": "1根"
+      }
+    },
+    {
+      "id": "5a2b60c1-5496-43bb-b449-9d3543b4cf91",
+      "ingredientId": "6995bb1a-59b4-4d4c-bf97-34fc6fcb05e6",
+      "name": {
+        "ja": "ごま油",
+        "zh": "香油"
+      },
+      "skip": true,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 2,
+      "amount": {
+        "ja": "大さじ1",
+        "zh": "1大勺"
+      }
+    },
+    {
+      "id": "38faee97-d660-41ec-8361-9a17a076aa56",
+      "ingredientId": "da54a337-e75d-468a-829b-d59886f40215",
+      "name": {
+        "ja": "酢",
+        "zh": "醋"
+      },
+      "skip": true,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 3,
+      "amount": {
+        "ja": "大さじ1",
+        "zh": "1大勺"
+      }
+    },
+    {
+      "id": "7b59d3a6-1373-438b-b815-ba9cc0fd99df",
+      "ingredientId": "a6b8519a-8f8b-442e-97a4-3b6c04105896",
+      "name": {
+        "ja": "醤油",
+        "zh": "酱油"
+      },
+      "skip": true,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 4,
+      "amount": {
+        "ja": "小さじ2",
+        "zh": "2小勺"
+      }
+    },
+    {
+      "id": "ca75e26a-98ef-412d-bf35-4a94545d36ce",
+      "ingredientId": "1b9fafdf-b143-43a3-a880-f59f4b581ebd",
+      "name": {
+        "ja": "白ごま",
+        "zh": "白芝麻"
+      },
+      "skip": true,
+      "recipeId": "sample-salad",
+      "variantId": "v1",
+      "row": 5,
+      "amount": {
+        "ja": "適量",
+        "zh": "适量"
+      }
+    },
+    {
+      "id": "76ea41e6-bcc9-4e9a-b83b-49439bac7651",
+      "ingredientId": "ebc6276e-b9f7-4750-a7f8-b0dd2e68720e",
+      "name": {
+        "ja": "合いびき肉",
+        "zh": "混合肉末"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 0,
+      "amount": {
+        "ja": "200g",
+        "zh": "200克"
+      }
+    },
+    {
+      "id": "a8b90992-bd10-4533-9ea6-bd02f6888dc1",
+      "ingredientId": "f67d9019-8c26-4a44-a863-03a1f6e11768",
+      "name": {
+        "ja": "玉ねぎ",
+        "zh": "洋葱"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 1,
+      "amount": {
+        "ja": "1個",
+        "zh": "1个"
+      }
+    },
+    {
+      "id": "4f69a9ad-0c42-4b4a-a2fc-0026041442a1",
+      "ingredientId": "3cc40ea1-f6cd-489c-b7cb-1efc0a037cad",
+      "name": {
+        "ja": "にんじん",
+        "zh": "胡萝卜"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 2,
+      "amount": {
+        "ja": "1/2本",
+        "zh": "半根"
+      }
+    },
+    {
+      "id": "1e60800d-ad0a-4cdd-9895-0555d7c480ad",
+      "ingredientId": "2304f672-a506-4d86-9f14-80ded0d23f73",
+      "name": {
+        "ja": "にんにく",
+        "zh": "大蒜"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 3,
+      "amount": {
+        "ja": "1片",
+        "zh": "1瓣"
+      }
+    },
+    {
+      "id": "ee1ed618-0e9b-4e6a-9ddb-66e0ab97c7cf",
+      "ingredientId": "4808ac00-e62c-402e-8417-92e310cc7fc1",
+      "name": {
+        "ja": "しょうが",
+        "zh": "生姜"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 4,
+      "amount": {
+        "ja": "1片",
+        "zh": "1块"
+      }
+    },
+    {
+      "id": "6063e857-c1f7-4e77-ac65-b15e760a2825",
+      "ingredientId": "0c7f66ab-4dcb-4d55-90c3-2390836f1fb2",
+      "name": {
+        "ja": "カットトマト缶",
+        "zh": "番茄罐头"
+      },
+      "skip": false,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 5,
+      "amount": {
+        "ja": "1/2缶（200g）",
+        "zh": "半罐（200克）"
+      }
+    },
+    {
+      "id": "04ce969a-e486-4256-9eeb-1e41d89799d3",
+      "ingredientId": "91f28e09-0e05-4ef4-9cd1-6d87f1738543",
+      "name": {
+        "ja": "カレー粉",
+        "zh": "咖喱粉"
+      },
+      "skip": true,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 6,
+      "amount": {
+        "ja": "大さじ1",
+        "zh": "1大勺"
+      }
+    },
+    {
+      "id": "d876df74-a68e-4f63-ba94-a61d61d561a0",
+      "ingredientId": "3435bb1f-e2dd-4299-8a8f-3e3d3ce35ac9",
+      "name": {
+        "ja": "ケチャップ",
+        "zh": "番茄酱"
+      },
+      "skip": true,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 7,
+      "amount": {
+        "ja": "大さじ1",
+        "zh": "1大勺"
+      }
+    },
+    {
+      "id": "22563f7d-a532-4ba1-b169-81f7282438d2",
+      "ingredientId": "d9714e5a-ab8c-443a-a6b6-ffea84e63504",
+      "name": {
+        "ja": "ウスターソース",
+        "zh": "伍斯特酱"
+      },
+      "skip": true,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 8,
+      "amount": {
+        "ja": "小さじ1",
+        "zh": "1小勺"
+      }
+    },
+    {
+      "id": "b1dc60fe-5ff6-456b-ae78-fd6dd2e1c6b2",
+      "ingredientId": "74ba9d18-cec1-46ba-9632-f58bcfa3fc5c",
+      "name": {
+        "ja": "塩",
+        "zh": "盐"
+      },
+      "skip": true,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 9,
+      "amount": {
+        "ja": "少々",
+        "zh": "少许"
+      }
+    },
+    {
+      "id": "b8226c69-4f24-43e0-923c-ba4303991cea",
+      "ingredientId": "9730a7c2-cc24-478e-bf64-d69787619246",
+      "name": {
+        "ja": "サラダ油",
+        "zh": "色拉油"
+      },
+      "skip": true,
+      "recipeId": "41344abb-1661-4984-bd7b-83884f1816e1",
+      "variantId": "a8c14cee-e1a0-44cf-b32c-27397c853fe9",
+      "row": 10,
+      "amount": {
+        "ja": "大さじ1",
+        "zh": "1大勺"
+      }
+    },
+    {
+      "id": "0401719c-1a0c-4335-ae63-f1c0e6291c97",
+      "ingredientId": "02cf6c5d-cf9c-4a7c-80cd-b0cb7a906ddd",
+      "name": {
+        "ja": "鶏もも肉",
+        "zh": "鸡腿肉"
+      },
+      "skip": false,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 0,
+      "amount": {
+        "ja": "200g",
+        "zh": "200克"
+      }
+    },
+    {
+      "id": "f2b350ea-0ad9-4a73-b51d-fc907cd5566d",
+      "ingredientId": "f67d9019-8c26-4a44-a863-03a1f6e11768",
+      "name": {
+        "ja": "玉ねぎ",
+        "zh": "洋葱"
+      },
+      "skip": false,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 1,
+      "amount": {
+        "ja": "1個",
+        "zh": "1个"
+      }
+    },
+    {
+      "id": "a794ffd0-c2fe-4cdd-a10a-1e1234e703d3",
+      "ingredientId": "3cc40ea1-f6cd-489c-b7cb-1efc0a037cad",
+      "name": {
+        "ja": "にんじん",
+        "zh": "胡萝卜"
+      },
+      "skip": false,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 2,
+      "amount": {
+        "ja": "1/2本",
+        "zh": "半根"
+      }
+    },
+    {
+      "id": "64069163-c8cf-4e88-adac-7cb8f8715e8c",
+      "ingredientId": "12241d1b-c7ef-4513-b64a-2aabc28c21a1",
+      "name": {
+        "ja": "じゃがいも",
+        "zh": "土豆"
+      },
+      "skip": false,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 3,
+      "amount": {
+        "ja": "1個",
+        "zh": "1个"
+      }
+    },
+    {
+      "id": "3c699fb6-9c5a-4e94-954b-e6121f728d59",
+      "ingredientId": "4e53b1a3-e08b-41eb-b549-c04dc401e46a",
+      "name": {
+        "ja": "カレールー",
+        "zh": "咖喱块"
+      },
+      "skip": false,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 4,
+      "amount": {
+        "ja": "1/4箱",
+        "zh": "1/4盒"
+      }
+    },
+    {
+      "id": "b1a1a12f-8a1a-4a6d-8adf-6c8c0dc2e157",
+      "ingredientId": "023050ff-ac58-4794-9978-59d416494ce4",
+      "name": {
+        "ja": "水",
+        "zh": "水"
+      },
+      "skip": true,
+      "recipeId": "sample-curry",
+      "variantId": "v2",
+      "row": 5,
+      "amount": {
+        "ja": "400ml",
+        "zh": "400毫升"
+      }
+    }
+  ]
+}

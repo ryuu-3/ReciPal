@@ -1,0 +1,405 @@
+[
+  {
+    "id": "02cf6c5d-cf9c-4a7c-80cd-b0cb7a906ddd",
+    "name": {
+      "ja": "鶏もも肉",
+      "zh": "鸡腿肉"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-meat"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.774Z",
+    "pantry": false
+  },
+  {
+    "id": "f67d9019-8c26-4a44-a863-03a1f6e11768",
+    "name": {
+      "ja": "玉ねぎ",
+      "zh": "洋葱"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-vegetable"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.789Z",
+    "pantry": false
+  },
+  {
+    "id": "3cc40ea1-f6cd-489c-b7cb-1efc0a037cad",
+    "name": {
+      "ja": "にんじん",
+      "zh": "胡萝卜"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-vegetable"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.794Z",
+    "pantry": false
+  },
+  {
+    "id": "12241d1b-c7ef-4513-b64a-2aabc28c21a1",
+    "name": {
+      "ja": "じゃがいも",
+      "zh": "土豆"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-vegetable"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.799Z",
+    "pantry": false
+  },
+  {
+    "id": "4e53b1a3-e08b-41eb-b549-c04dc401e46a",
+    "name": {
+      "ja": "カレールー",
+      "zh": "咖喱块"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.806Z",
+    "pantry": false
+  },
+  {
+    "id": "023050ff-ac58-4794-9978-59d416494ce4",
+    "name": {
+      "ja": "水",
+      "zh": "水"
+    },
+    "aliases": {},
+    "tags": [],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T10:25:56.271Z",
+    "pantry": true
+  },
+  {
+    "id": "6d22447d-56f4-41d3-a843-6c127c5aa906",
+    "name": {
+      "ja": "トマト",
+      "zh": "番茄"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-vegetable"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.811Z",
+    "pantry": false
+  },
+  {
+    "id": "4861dcb1-327c-4b42-bbf3-c6e6ce9ed04b",
+    "name": {
+      "ja": "きゅうり",
+      "zh": "黄瓜"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-vegetable"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.819Z",
+    "pantry": false
+  },
+  {
+    "id": "6995bb1a-59b4-4d4c-bf97-34fc6fcb05e6",
+    "name": {
+      "ja": "ごま油",
+      "zh": "香油"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:37:52.237Z",
+    "pantry": true
+  },
+  {
+    "id": "da54a337-e75d-468a-829b-d59886f40215",
+    "name": {
+      "ja": "酢",
+      "zh": "醋"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:37:52.245Z",
+    "pantry": true
+  },
+  {
+    "id": "a6b8519a-8f8b-442e-97a4-3b6c04105896",
+    "name": {
+      "ja": "醤油",
+      "zh": "酱油"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning",
+      "tag-soy"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:37:52.262Z",
+    "pantry": true
+  },
+  {
+    "id": "1b9fafdf-b143-43a3-a880-f59f4b581ebd",
+    "name": {
+      "ja": "白ごま",
+      "zh": "白芝麻"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:37:52.283Z",
+    "pantry": true
+  },
+  {
+    "id": "a31d0107-2fcc-4483-8675-8a2320fb9627",
+    "name": {
+      "ja": "豆腐",
+      "zh": "豆腐"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-soy"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.851Z",
+    "pantry": false
+  },
+  {
+    "id": "0a0497a2-582f-4665-8b06-9676452f0a33",
+    "name": {
+      "ja": "乾燥わかめ",
+      "zh": "干裙带菜"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seaweed"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.861Z",
+    "pantry": false
+  },
+  {
+    "id": "54bd29a0-0a9c-4cfd-a858-9351f17688a7",
+    "name": {
+      "ja": "だし汁",
+      "zh": "高汤"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:36:10.876Z",
+    "pantry": false
+  },
+  {
+    "id": "f9cce093-e759-4f8e-828b-7a5822176452",
+    "name": {
+      "ja": "味噌",
+      "zh": "味噌"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning",
+      "tag-soy"
+    ],
+    "createdAt": "2026-10-17T09:43:43.449Z",
+    "updatedAt": "2026-10-17T11:37:52.293Z",
+    "pantry": true
+  },
+  {
+    "id": "ebc6276e-b9f7-4750-a7f8-b0dd2e68720e",
+    "name": {
+      "ja": "合いびき肉",
+      "zh": "混合肉末"
+    },
+    "aliases": {
+      "ja": [
+        "合挽き肉",
+        "ひき肉"
+      ],
+      "zh": [
+        "肉末",
+        "猪牛肉末"
+      ]
+    },
+    "tags": [
+      "tag-meat"
+    ],
+    "pantry": false,
+    "createdAt": "2026-10-17T11:12:44.421Z",
+    "updatedAt": "2026-10-17T11:12:44.421Z"
+  },
+  {
+    "id": "2304f672-a506-4d86-9f14-80ded0d23f73",
+    "name": {
+      "ja": "にんにく",
+      "zh": "大蒜"
+    },
+    "aliases": {
+      "ja": [
+        "ニンニク"
+      ],
+      "zh": [
+        "蒜"
+      ]
+    },
+    "tags": [
+      "tag-vegetable"
+    ],
+    "pantry": false,
+    "createdAt": "2026-10-17T11:12:44.429Z",
+    "updatedAt": "2026-10-17T11:12:44.429Z"
+  },
+  {
+    "id": "4808ac00-e62c-402e-8417-92e310cc7fc1",
+    "name": {
+      "ja": "しょうが",
+      "zh": "生姜"
+    },
+    "aliases": {
+      "ja": [
+        "生姜",
+        "ショウガ"
+      ],
+      "zh": [
+        "姜"
+      ]
+    },
+    "tags": [
+      "tag-vegetable"
+    ],
+    "pantry": false,
+    "createdAt": "2026-10-17T11:12:44.434Z",
+    "updatedAt": "2026-10-17T11:12:44.434Z"
+  },
+  {
+    "id": "0c7f66ab-4dcb-4d55-90c3-2390836f1fb2",
+    "name": {
+      "ja": "カットトマト缶",
+      "zh": "番茄罐头"
+    },
+    "aliases": {
+      "ja": [
+        "トマト缶"
+      ],
+      "zh": [
+        "番茄丁罐头"
+      ]
+    },
+    "tags": [
+      "tag-vegetable"
+    ],
+    "pantry": false,
+    "createdAt": "2026-10-17T11:12:44.442Z",
+    "updatedAt": "2026-10-17T11:12:44.442Z"
+  },
+  {
+    "id": "91f28e09-0e05-4ef4-9cd1-6d87f1738543",
+    "name": {
+      "ja": "カレー粉",
+      "zh": "咖喱粉"
+    },
+    "aliases": {},
+    "tags": [
+      "tag-seasoning"
+    ],
+    "pantry": true,
+    "createdAt": "2026-10-17T11:12:44.448Z",
+    "updatedAt": "2026-10-17T11:37:52.300Z"
+  },
+  {
+    "id": "3435bb1f-e2dd-4299-8a8f-3e3d3ce35ac9",
+    "name": {
+      "ja": "ケチャップ",
+      "zh": "番茄酱"
+    },
+    "aliases": {
+      "ja": [
+        "トマトケチャップ"
+      ]
+    },
+    "tags": [
+      "tag-seasoning"
+    ],
+    "pantry": true,
+    "createdAt": "2026-10-17T11:12:44.453Z",
+    "updatedAt": "2026-10-17T11:37:52.304Z"
+  },
+  {
+    "id": "d9714e5a-ab8c-443a-a6b6-ffea84e63504",
+    "name": {
+      "ja": "ウスターソース",
+      "zh": "伍斯特酱"
+    },
+    "aliases": {
+      "ja": [
+        "ソース"
+      ],
+      "zh": [
+        "辣酱油"
+      ]
+    },
+    "tags": [
+      "tag-seasoning"
+    ],
+    "pantry": true,
+    "createdAt": "2026-10-17T11:12:44.459Z",
+    "updatedAt": "2026-10-17T11:37:52.308Z"
+  },
+  {
+    "id": "74ba9d18-cec1-46ba-9632-f58bcfa3fc5c",
+    "name": {
+      "ja": "塩",
+      "zh": "盐"
+    },
+    "aliases": {
+      "zh": [
+        "食盐"
+      ]
+    },
+    "tags": [
+      "tag-seasoning"
+    ],
+    "pantry": true,
+    "createdAt": "2026-10-17T11:12:44.464Z",
+    "updatedAt": "2026-10-17T11:12:44.464Z"
+  },
+  {
+    "id": "9730a7c2-cc24-478e-bf64-d69787619246",
+    "name": {
+      "ja": "サラダ油",
+      "zh": "色拉油"
+    },
+    "aliases": {
+      "ja": [
+        "油"
+      ],
+      "zh": [
+        "食用油"
+      ]
+    },
+    "tags": [
+      "tag-seasoning"
+    ],
+    "pantry": true,
+    "createdAt": "2026-10-17T11:12:44.469Z",
+    "updatedAt": "2026-10-17T11:12:44.469Z"
+  }
+]

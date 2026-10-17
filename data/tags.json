@@ -1,0 +1,92 @@
+[
+  {
+    "id": "tag-meat",
+    "name": {
+      "ja": "肉類",
+      "zh": "肉类"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-seafood",
+    "name": {
+      "ja": "魚介",
+      "zh": "海鲜"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-vegetable",
+    "name": {
+      "ja": "野菜",
+      "zh": "蔬菜"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-soy",
+    "name": {
+      "ja": "大豆製品",
+      "zh": "豆制品"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-seaweed",
+    "name": {
+      "ja": "海藻",
+      "zh": "海藻"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-egg-dairy",
+    "name": {
+      "ja": "卵・乳製品",
+      "zh": "蛋奶"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-seasoning",
+    "name": {
+      "ja": "調味料",
+      "zh": "调味料"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "ingredient"
+  },
+  {
+    "id": "tag-quick",
+    "name": {
+      "ja": "時短",
+      "zh": "快手"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "recipe"
+  },
+  {
+    "id": "tag-vegetarian",
+    "name": {
+      "ja": "ベジタリアン",
+      "zh": "素食"
+    },
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "type": "recipe"
+  }
+]
