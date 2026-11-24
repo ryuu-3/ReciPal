@@ -10,7 +10,7 @@ const BASE_PORT = Number(process.env.PORT) || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DATA_DIR = path.join(__dirname, 'data');
 const NO_OPEN = process.argv.includes('--no-open');
-// 旧形式の文字列データを何語のテキストとして扱うか（public/i18n.js の DEFAULT_LANG と合わせる）
+// 旧形式の文字列データを何語のテキストとして扱うか（public/i18n/i18n.js の DEFAULT_LANG と合わせる）
 const DEFAULT_LANG = 'ja';
 
 const MIME = {
