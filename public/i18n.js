@@ -1,6 +1,6 @@
 // ReciPal 翻訳辞書と言語切り替え
 // 画面の表示言語を追加するときは LANGUAGES と MESSAGES に同じキーで追加する。
-// データ（レシピの中身など）に使える言語は DATA_LANGUAGES に追加する（画面の翻訳は不要）
+// データ（レシピの中身など）に使える言語は、今は表示言語と同じ（DATA_LANGUAGES）
 (() => {
   'use strict';
 
@@ -14,11 +14,9 @@
   ];
 
   // データの言語として選べるもの。並び順が入力フォームのタブの順になる。
-  // どれを使うかは設定画面で選び、data/settings.json に保存する
-  const DATA_LANGUAGES = [
-    ...LANGUAGES,
-    { code: 'ko', htmlLang: 'ko', label: '한국어' },
-  ];
+  // どれを使うかは設定画面で選び、data/settings.json に保存する。
+  // 今は表示言語と同じにしている。画面を翻訳せずにデータだけ使える言語を増やすときは、ここに追加する
+  const DATA_LANGUAGES = [...LANGUAGES];
   const DEFAULT_DATA_LANGUAGES = ['ja', 'zh'];
 
   // 既定カテゴリはこのキーでデータに保存し、表示時に翻訳する
