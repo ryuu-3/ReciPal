@@ -1,6 +1,6 @@
 // エントリポイント：画面の切り替え、言語選択、データの読み込み
 import { h, onStoreChange, reloadAll, requestClose } from './common.js';
-import * as recipes from './recipes.js';
+import * as recipes from './recipes/index.js';
 import * as ingredients from './ingredients.js';
 import * as tags from './tags.js';
 import * as shopping from './shopping.js';
