@@ -2,7 +2,7 @@
 // 品目は「1 レシピの 1 材料行」ごとに 1 行で、同じ材料でもまとめない（まとめるのはコピーするテキストだけ）。
 // 品目は最初「買う」（チェックあり）。チェックを外すと「買わないもの」に移る（データ上は skip: true）
 import {
-  t, h, locNode, toast, errorText, byName, normalize, closeOnBackdropClick,
+  t, h, locNode, toast, errorText, byName, normalize, closeOnBackdropClick, isFallback,
   api, setShopping, store,
   findIngredient, findIngredientByName, findTag, ingredientName, variantName,
 } from './common.js';
@@ -57,6 +57,14 @@ function refName(ref, compact = false) {
   const variant = index >= 0 ? variants[index] : { label: ref.label, servings: ref.servings };
   const title = I18N.text(recipe ? recipe.title : ref.title) || t('shopping.deletedRecipe');
   return recipeVariantName(title, variant, index, compact);
+}
+
+// 対象レシピの表示名の要素。レシピ名かバリエーション名に表示中の言語の訳がなければ、他の画面と同じく斜体にする
+function refNode(ref, compact = false) {
+  const recipe = store.recipes.find((r) => r.id === ref.recipeId);
+  const variant = recipe && (recipe.variants || []).find((v) => v.id === ref.variantId);
+  const fallback = isFallback(recipe ? recipe.title : ref.title) || isFallback(variant ? variant.label : ref.label);
+  return h('span', { class: fallback ? 'fallback' : null }, refName(ref, compact));
 }
 
 // 同じレシピを 2 回以上追加したときの「×2」バッジ（1 回なら何も出さない）
@@ -117,7 +125,7 @@ export const uncheckedCount = () => new Set(toBuy().map(mergeKey)).size;
 function sourceLabel(item) {
   if (!item.recipeId) return t('shopping.manual');
   const ref = itemRef(item);
-  return ref ? refName(ref, true) : t('shopping.deletedRecipe');
+  return ref ? refNode(ref, true) : t('shopping.deletedRecipe');
 }
 
 function itemRow(item) {
@@ -153,7 +161,7 @@ export function render() {
   el.recipes.hidden = recipes.length === 0;
   el.recipeList.replaceChildren(
     ...recipes.map((ref) => h('span', { class: 'shopping-recipe' },
-      refName(ref),
+      refNode(ref),
       timesBadge(ref),
       h('button', {
         type: 'button',
@@ -171,7 +179,7 @@ export function render() {
   // replaceChildren は false を文字列として表示するので、条件付きの要素は配列で渡す
   el.list.replaceChildren(
     ...groupedItems().map((group) => h('section', { class: 'shopping-group' },
-      h('h3', {}, groupName(group)),
+      group.tag ? locNode('h3', group.tag.name) : h('h3', {}, t('shopping.other')),
       ...group.items.map(itemRow),
     )),
     ...(skipped.length

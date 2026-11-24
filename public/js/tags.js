@@ -1,6 +1,6 @@
 // タグ画面：レシピのタグ（料理の特徴）と材料のタグ（材料の分類）の一覧・追加/編集・削除
 import {
-  t, h, locNode, toast, showFormError,
+  t, h, locNode, toast, showFormError, isFallback, untranslatedTag, otherNames,
   saveItem, deleteItem, reloadAll,
   langInput, collectLoc, isBlankLoc, LangEditor, guardUnsaved,
   findTag, tagUsage, sortedTags,
@@ -39,21 +39,16 @@ const langEditor = new LangEditor({
 
 const usageText = (tag) => t(TYPE_TEXT[tag.type].usage, { n: tagUsage(tag) });
 
-// 現在の言語以外の名前を「简体中文: 肉类」の形で並べる
-function otherNames(loc) {
-  return I18N.LANGUAGES
-    .filter((l) => l.code !== I18N.language && loc && loc[l.code])
-    .map((l) => `${l.label}: ${loc[l.code]}`)
-    .join(' / ');
-}
-
 export function render() {
   for (const section of el.sections) {
     const tags = sortedTags(section.dataset.tagType);
     section.querySelector('.tag-list').replaceChildren(
       ...tags.map((tag) => h('button', { type: 'button', class: 'item-row', onclick: () => openForm(tag) },
         h('div', { class: 'item-main' },
-          locNode('span', tag.name, { class: 'item-name chip' }),
+          h('div', { class: 'item-title' },
+            locNode('span', tag.name, { class: 'item-name chip' }),
+            isFallback(tag.name) && untranslatedTag(),
+          ),
           h('span', { class: 'item-sub' }, otherNames(tag.name)),
         ),
         h('span', { class: 'item-usage' }, usageText(tag)),

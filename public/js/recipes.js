@@ -1,6 +1,6 @@
 // レシピ画面：一覧・詳細・追加/編集フォーム
 import {
-  t, h, translated, locNode, toast, errorText, showFormError, matchesKeyword,
+  t, h, translated, locNode, toast, errorText, showFormError, matchesKeyword, untranslatedTag,
   saveItem, deleteItem, reloadAll, store,
   langInput, collectLoc, isBlankLoc, LangEditor, guardUnsaved, closeOnBackdropClick,
   findIngredient, findIngredientByName, ingredientName, ingredientAliases, ingredientTagIds,
@@ -160,7 +160,7 @@ function renderList() {
       return h('button', { class: 'recipe-card', type: 'button', onclick: () => openDetail(r.id) },
         h('div', { class: 'card-tags' },
           r.category && h('span', { class: 'tag' }, I18N.categoryLabel(r.category)),
-          fallback.lang && h('span', { class: 'tag untranslated' }, t('translation.missing')),
+          fallback.lang && untranslatedTag(),
         ),
         title,
         desc,

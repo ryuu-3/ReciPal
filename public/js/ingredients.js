@@ -1,6 +1,7 @@
 // 材料画面：材料マスタの一覧・追加/編集・削除、レシピからの取り込み
 import {
   t, h, locNode, toast, errorText, showFormError, matchesKeyword, byName,
+  isFallback, untranslatedTag, otherNames,
   api, saveItem, deleteItem, reloadAll, store,
   langInput, collectLoc, isBlankLoc, LangEditor, guardUnsaved,
   findIngredient, ingredientAliases, ingredientUsage,
@@ -63,14 +64,6 @@ function filteredIngredients() {
     .sort(byName((ing) => ing.name));
 }
 
-// 現在の言語以外の名前を「简体中文: 鸡腿肉」の形で並べる
-function otherNames(loc) {
-  return I18N.LANGUAGES
-    .filter((l) => l.code !== I18N.language && loc && loc[l.code])
-    .map((l) => `${l.label}: ${loc[l.code]}`)
-    .join(' / ');
-}
-
 function renderList() {
   const items = filteredIngredients();
   el.list.replaceChildren(
@@ -82,6 +75,7 @@ function renderList() {
         h('div', { class: 'item-main' },
           h('div', { class: 'item-title' },
             locNode('span', ing.name, { class: 'item-name' }),
+            isFallback(ing.name) && untranslatedTag(),
             ing.pantry && h('span', { class: 'tag pantry' }, t('ingredient.pantry')),
           ),
           h('span', { class: 'item-sub' }, otherNames(ing.name)),
@@ -123,11 +117,15 @@ function importItem(group, checked) {
   const isNew = group.action === 'create';
   // 紐付けは、紐付ける先の材料の今の名前で表示する
   const master = !isNew && findIngredient(group.ingredientId);
+  const name = master ? master.name : group.name;
   const others = isNew ? otherNames(group.name) : '';
   return h('label', { class: 'import-item' },
     h('input', { type: 'checkbox', 'data-key': group.key, checked, onchange: updateImportApply }),
     h('div', { class: 'item-main' },
-      locNode('span', master ? master.name : group.name, { class: 'item-name' }),
+      h('div', { class: 'item-title' },
+        locNode('span', name, { class: 'item-name' }),
+        isFallback(name) && untranslatedTag(),
+      ),
       others && h('span', { class: 'item-sub' }, others),
       isNew && Object.keys(group.addedAliases).length > 0 &&
         h('span', { class: 'item-sub' }, `${t('ingredient.aliases')}: ${aliasesText(group.addedAliases)}`),
