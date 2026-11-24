@@ -60,6 +60,15 @@ function renderShoppingBadge() {
   badge.textContent = String(n);
 }
 
+// 画面の文言（i18n/locales/*.json）を読み込んでから初期化する。
+// 読み込めなくても操作はできるようにし（文言の代わりに翻訳キーが出る）、原因を画面の上部に出す
+try {
+  await I18N.ready;
+} catch (err) {
+  console.error(err);
+  document.body.prepend(h('p', { class: 'error' }, err.message));
+}
+
 initNavigation();
 initLanguageSelect();
 initDialogs();
