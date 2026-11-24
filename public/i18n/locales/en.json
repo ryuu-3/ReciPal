@@ -153,8 +153,6 @@
   "backup.locationCustom": "set by the RECIPAL_BACKUP_DIR environment variable",
   "backup.last": "Last backup",
   "backup.none": "None yet",
-  "backup.keep": "Kept",
-  "backup.keepDays": "{n} days ({count} available now)",
   "backup.loading": "Loading…",
   "backup.error.BACKUP_DIR_NOT_ALLOWED": "Backups are not being made because this location cannot be used. Inside the ReciPal folder, only the default backup folder can be used.",
   "backup.error.BACKUP_FAILED": "Backup failed. Your data is still being saved. Cause: {message}",

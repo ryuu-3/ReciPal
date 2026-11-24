@@ -153,8 +153,6 @@
   "backup.locationCustom": "環境変数 RECIPAL_BACKUP_DIR で指定",
   "backup.last": "最後のバックアップ",
   "backup.none": "まだありません",
-  "backup.keep": "残す数",
-  "backup.keepDays": "{n}日分（今あるのは {count} 日分）",
   "backup.loading": "読み込み中…",
   "backup.error.BACKUP_DIR_NOT_ALLOWED": "この場所はバックアップ先に使えないため、バックアップを取っていません。ReciPal のフォルダの中は、既定の backup フォルダ以外は使えません。",
   "backup.error.BACKUP_FAILED": "バックアップに失敗しました。データの保存は続けています。原因：{message}",

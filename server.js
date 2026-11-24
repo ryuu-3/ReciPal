@@ -157,8 +157,6 @@ async function backupStatus() {
   return {
     dir: BACKUP_DIR,
     custom: Boolean(process.env.RECIPAL_BACKUP_DIR),
-    keep: BACKUP_KEEP,
-    count: names.length,
     lastBackupAt: stat ? stat.mtime.toISOString() : null,
     error: backupState.error,
   };

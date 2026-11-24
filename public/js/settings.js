@@ -64,7 +64,6 @@ function renderBackup() {
         h('code', { class: 'backup-dir' }, b.dir),
         h('span', { class: 'muted' }, t(b.custom ? 'backup.locationCustom' : 'backup.locationDefault'))),
       ...row(t('backup.last'), date),
-      ...row(t('backup.keep'), t('backup.keepDays', { n: b.keep, count: b.count })),
     ),
     // replaceChildren は null を文字列として表示するので、条件付きの要素は配列で渡す
     ...(b.error ? [h('p', { class: 'error' }, t(`backup.error.${b.error.code}`, { message: b.error.message }))] : []),
