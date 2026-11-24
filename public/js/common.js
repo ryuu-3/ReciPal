@@ -94,6 +94,22 @@ export function locNode(tag, value, props = {}, fallback = null) {
   return node;
 }
 
+// 表示中の言語の訳がなく、他の言語で代用して表示するか
+export const isFallback = (value) => I18N.pick(value).fallback;
+
+// 「未翻訳」の印。表示中の言語の訳がない名前の横に付ける
+export const untranslatedTag = () => h('span', { class: 'tag untranslated' }, t('translation.missing'));
+
+// 表示中の言語以外の名前を「简体中文: 鸡腿肉」の形で並べる。
+// 訳がなく他の言語で代用している場合、その言語の名前はすでに表示しているので並べない
+export function otherNames(loc) {
+  const shown = I18N.pick(loc).lang;
+  return I18N.LANGUAGES
+    .filter((l) => l.code !== I18N.language && l.code !== shown && loc && loc[l.code])
+    .map((l) => `${l.label}: ${loc[l.code]}`)
+    .join(' / ');
+}
+
 export const normalize = (s) => String(s || '').normalize('NFKC').trim().toLowerCase();
 
 // スペース区切りの全キーワードが含まれるか
