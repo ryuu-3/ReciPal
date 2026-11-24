@@ -284,6 +284,37 @@ dialog.drawer[open] { animation: drawer-in 0.22s ease-out; }
 .item-usage { flex-shrink: 0; font-size: 0.85rem; color: var(--muted); }
 .item-usage.unused { font-style: italic; }
 
+/* ---------- 材料の取り込み ---------- */
+.import-select-all { display: flex; gap: 8px; margin: 4px 0 8px; }
+.import-section h3 {
+  margin: 20px 0 4px;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  border-bottom: 2px solid var(--accent-soft);
+}
+.import-section > .hint { margin-bottom: 8px; }
+.import-list { display: flex; flex-direction: column; gap: 6px; }
+.recipe-form .import-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: normal;
+  margin: 0;
+  cursor: pointer;
+}
+.import-item:hover { border-color: var(--accent); }
+.recipe-form .import-item > input { width: auto; margin: 4px 0 0; accent-color: var(--accent); flex-shrink: 0; }
+.import-item:has(input:not(:checked)) .item-main { opacity: 0.5; }
+.import-item .item-name { align-self: auto; }
+
+/* 取り込み直後に、登録・更新した材料を少しのあいだ目立たせる */
+.item-row.highlight { border-color: var(--accent); background: var(--accent-soft); }
+
 /* ---------- タグ（チップ） ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .chips:empty { display: none; }

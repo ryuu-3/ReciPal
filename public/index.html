@@ -266,6 +266,43 @@
     </form>
   </dialog>
 
+  <!-- レシピからの材料の取り込み（確認してから取り込む） -->
+  <dialog id="import-dialog">
+    <form id="import-form" class="recipe-form" method="dialog" novalidate>
+      <header class="dialog-header">
+        <div>
+          <h2 data-i18n="ingredient.importTitle"></h2>
+          <p class="hint" data-i18n="ingredient.importIntro"></p>
+        </div>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <div class="import-select-all">
+        <button type="button" id="btn-import-select-all" class="btn small" data-i18n="ingredient.importSelectAll"></button>
+        <button type="button" id="btn-import-select-none" class="btn small" data-i18n="ingredient.importSelectNone"></button>
+      </div>
+
+      <section id="import-create-section" class="import-section">
+        <h3 id="import-create-heading"></h3>
+        <p class="hint" data-i18n="ingredient.importCreateHint"></p>
+        <div id="import-create-list" class="import-list"></div>
+      </section>
+
+      <section id="import-link-section" class="import-section">
+        <h3 id="import-link-heading"></h3>
+        <p class="hint" data-i18n="ingredient.importLinkHint"></p>
+        <div id="import-link-list" class="import-list"></div>
+      </section>
+
+      <p id="import-form-error" class="error" hidden></p>
+
+      <footer class="dialog-footer">
+        <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
+        <button type="submit" id="btn-import-apply" class="btn primary"></button>
+      </footer>
+    </form>
+  </dialog>
+
   <!-- タグの追加・編集 -->
   <dialog id="tag-dialog" class="narrow">
     <form id="tag-form" class="recipe-form" method="dialog" novalidate>
