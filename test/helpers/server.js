@@ -47,7 +47,9 @@ function waitForStart(child, output) {
  * @param {(dir: string) => void} [options.setup]  起動前に一時フォルダを準備する処理
  */
 async function startServer({ data, env = {}, setup } = {}) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'recipal-test-'));
+  // Windows では一時フォルダが短い名前（C:\Users\RUNNER~1\...）で返ることがあり、
+  // サーバー側が使う正式な名前と食い違うとパスの比較を誤るので、正式な名前にしてから使う
+  const dir = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'recipal-test-')));
   for (const name of APP_FILES) fs.cpSync(path.join(ROOT, name), path.join(dir, name), { recursive: true });
   if (data) {
     fs.mkdirSync(path.join(dir, 'data'));
@@ -72,7 +74,7 @@ async function startServer({ data, env = {}, setup } = {}) {
     if (port) return createHandle(dir, child, port, output);
     child.kill();
   }
-  fs.rmSync(dir, { recursive: true, force: true });
+  removeDir(dir);
   throw new Error('空いているポートが見つかりませんでした');
 }
 
@@ -141,9 +143,14 @@ function createHandle(dir, child, port, output) {
           child.kill();
         });
       }
-      fs.rmSync(dir, { recursive: true, force: true });
+      removeDir(dir);
     },
   };
+}
+
+// Windows ではサーバーを止めた直後にファイルがまだ使用中のことがあるので、削除を数回やり直す
+function removeDir(dir) {
+  fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 }
 
 module.exports = { ROOT, startServer, localDate };

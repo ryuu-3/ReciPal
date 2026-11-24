@@ -251,12 +251,14 @@ node --test
 - テストは、一時フォルダにプログラムをコピーし、テスト用のデータでサーバーを起動して確かめます。**自分の `data`・`backup` には触れません。** 環境変数 `RECIPAL_BACKUP_DIR` や `PORT` を設定していても、テストでは使いません。
 - 対象：レシピ・材料・タグの API、材料の取り込み、買い物リスト、自動バックアップ、起動時の処理（初回起動・以前の形式からの移行）、アクセス制限、設定、画面の文言（`scripts/check-i18n.js` も一緒に実行されます）
 - 画面（ブラウザ）の操作はテストしていません。画面を変えたときは、ブラウザで動作を確かめてください。
+- **自動実行**：GitHub に push したとき（`main` とプルリクエスト）、GitHub Actions が Linux と Windows でテストを実行します（`.github/workflows/test.yml`）。結果はプルリクエストの画面に ✓ / ✕ で表示されます。✕ のときは「Details」から失敗したテストを確認できます。
 - テストを追加するときは、`test/` に `〇〇.test.js` という名前で置きます。サーバーの起動は `test/helpers/server.js` の `startServer()` を使います。
 
 ## ファイル構成
 
 ```
 ReciPal.bat              ダブルクリックで起動
+.github/workflows/test.yml  テストの自動実行（GitHub Actions。Linux と Windows）
 server.js                起動（ポートの選択・ブラウザを開く）。中身は server/ にある
 server/                  サーバーの処理（Node.js の標準モジュールのみ）
   config.js              フォルダの場所・ホスト・ポートなどの設定値

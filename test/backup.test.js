@@ -17,7 +17,7 @@ const addTag = (app, name) => app.post('/api/tags', { type: 'recipe', name: { ja
 const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const tempDirs = [];
 const tempDir = () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'recipal-backup-'));
+  const dir = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'recipal-backup-')));
   tempDirs.push(dir);
   return dir;
 };
