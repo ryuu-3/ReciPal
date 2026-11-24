@@ -46,7 +46,7 @@ function recipeVariantName(title, variant, index, compact = false) {
   const hasDetail = I18N.text(variant.label) || variant.servings;
   if (!hasDetail) return title;
   const detail = variantName(variant, Math.max(index, 0));
-  return compact ? `${title} ${detail}` : t('variant.nameWithServings', { label: title, servings: detail });
+  return compact ? t('shopping.sourceName', { title, detail }) : t('variant.nameWithServings', { label: title, servings: detail });
 }
 
 // 対象レシピの表示名。今のレシピがあれば最新の名前、削除されていれば追加時の控えを使う
@@ -253,14 +253,14 @@ function mergedAmounts(items) {
       return ref && ref.times > 1 ? `${amount}${t('shopping.times', { n: ref.times })}` : amount;
     })
     .filter(Boolean)
-    .join(' ＋ ');
+    .join(t('shopping.copyAmountSeparator'));
 }
 
 function shoppingText() {
   const date = new Date().toLocaleDateString(I18N.htmlLang(I18N.language));
   const lines = [t('shopping.copyTitle', { date })];
   for (const group of groupedItems()) {
-    lines.push('', `【${groupName(group)}】`);
+    lines.push('', t('shopping.copyGroup', { name: groupName(group) }));
     // 並び順で同じ材料は隣り合っているので、出てきた順にまとめる
     const merged = new Map();
     for (const item of group.items) {
@@ -270,7 +270,7 @@ function shoppingText() {
     }
     for (const items of merged.values()) {
       const amounts = mergedAmounts(items);
-      lines.push(`・${I18N.text(itemName(items[0]))}${amounts ? ` ${amounts}` : ''}`);
+      lines.push(t('shopping.copyItem', { text: `${I18N.text(itemName(items[0]))}${amounts ? ` ${amounts}` : ''}` }));
     }
   }
   return lines.join('\n');
