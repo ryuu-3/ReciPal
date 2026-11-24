@@ -249,7 +249,7 @@ node --test
 
 - 変更したら、コミットの前に実行してください。最後に `# fail 0` と出れば問題ありません。
 - テストは、一時フォルダにプログラムをコピーし、テスト用のデータでサーバーを起動して確かめます。**自分の `data`・`backup` には触れません。** 環境変数 `RECIPAL_BACKUP_DIR` や `PORT` を設定していても、テストでは使いません。
-- 対象：レシピ・材料・タグの API、材料の取り込み、買い物リスト、自動バックアップ
+- 対象：レシピ・材料・タグの API、材料の取り込み、買い物リスト、自動バックアップ、起動時の処理（初回起動・以前の形式からの移行）、アクセス制限、設定、画面の文言（`scripts/check-i18n.js` も一緒に実行されます）
 - 画面（ブラウザ）の操作はテストしていません。画面を変えたときは、ブラウザで動作を確かめてください。
 - テストを追加するときは、`test/` に `〇〇.test.js` という名前で置きます。サーバーの起動は `test/helpers/server.js` の `startServer()` を使います。
 
@@ -301,6 +301,10 @@ test/                    テスト（node --test）
   ingredient-import.test.js  材料の取り込み
   shopping.test.js       買い物リスト
   backup.test.js         自動バックアップ
+  startup.test.js        起動時の処理（初回起動・以前の形式からの移行）
+  security.test.js       アクセス制限（Host・Origin・Content-Type・public の外のファイル）
+  settings.test.js       設定（データの言語）
+  i18n.test.js           画面の文言のチェック（scripts/check-i18n.js を実行）
 ```
 
 ## API
