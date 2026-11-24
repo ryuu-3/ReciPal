@@ -1,5 +1,6 @@
 // ReciPal 翻訳辞書と言語切り替え
-// 言語を追加するときは LANGUAGES と MESSAGES に同じキーで追加する
+// 画面の表示言語を追加するときは LANGUAGES と MESSAGES に同じキーで追加する。
+// データ（レシピの中身など）に使える言語は DATA_LANGUAGES に追加する（画面の翻訳は不要）
 (() => {
   'use strict';
 
@@ -10,6 +11,15 @@
     { code: 'ja', htmlLang: 'ja', label: '日本語' },
     { code: 'zh', htmlLang: 'zh-CN', label: '简体中文' },
   ];
+
+  // データの言語として選べるもの。並び順が入力フォームのタブの順になる。
+  // どれを使うかは設定画面で選び、data/settings.json に保存する
+  const DATA_LANGUAGES = [
+    ...LANGUAGES,
+    { code: 'en', htmlLang: 'en', label: 'English' },
+    { code: 'ko', htmlLang: 'ko', label: '한국어' },
+  ];
+  const DEFAULT_DATA_LANGUAGES = ['ja', 'zh'];
 
   // 既定カテゴリはこのキーでデータに保存し、表示時に翻訳する
   const CATEGORY_KEYS = ['main', 'side', 'soup', 'staple', 'dessert', 'other'];
@@ -151,7 +161,13 @@
       'form.titleRequired': 'レシピ名をいずれかの言語で入力してください。',
       'form.confirmDiscard': '編集中の内容は保存されていません。破棄して閉じますか？',
       'form.editLanguage': '入力言語',
-      'form.editLanguageHint': '空欄に薄く表示される文字は、他の言語で入力した内容です。',
+      'form.editLanguageHint': '空欄に薄く表示される文字は、他の言語で入力した内容です。入力する言語は ⚙ 設定で変えられます。',
+
+      'settings.open': '設定',
+      'settings.title': '設定',
+      'settings.dataLanguages': 'データの言語',
+      'settings.dataLanguagesHint': 'レシピ・材料・タグの入力フォームに出す言語を選びます。画面の表示言語（右上）とは別に設定できます。チェックを外しても、その言語で登録済みのデータは消えません（ほかの言語の訳がない項目では、その言語で表示されます）。',
+      'settings.inUse': '登録済みのデータあり（{n}件）',
       'form.incomplete': 'レシピ名が未入力',
 
       'translation.missing': '未翻訳',
@@ -199,6 +215,7 @@
       'error.SERVER_ERROR': 'サーバーでエラーが発生しました。',
       'error.NETWORK': 'サーバーに接続できません。ReciPal が起動しているか確認してください。',
       'error.UNKNOWN': 'エラーが発生しました（{status}）。',
+      'error.DATA_LANGUAGES_REQUIRED': 'データの言語を 1 つ以上選んでください。',
     },
 
     zh: {
@@ -337,7 +354,13 @@
       'form.titleRequired': '请至少用一种语言输入食谱名称。',
       'form.confirmDiscard': '正在编辑的内容尚未保存。确定要放弃并关闭吗？',
       'form.editLanguage': '输入语言',
-      'form.editLanguageHint': '空白输入框中的浅色文字为其他语言的内容。',
+      'form.editLanguageHint': '空白输入框中的浅色文字为其他语言的内容。可在 ⚙ 设置中更改输入语言。',
+
+      'settings.open': '设置',
+      'settings.title': '设置',
+      'settings.dataLanguages': '数据语言',
+      'settings.dataLanguagesHint': '选择食谱、食材、标签的输入表单中显示的语言。可与界面显示语言（右上角）分开设置。取消勾选后，已用该语言登记的数据不会被删除（没有其他语言译文的项目仍以该语言显示）。',
+      'settings.inUse': '已有登记数据（{n}项）',
       'form.incomplete': '未填写食谱名称',
 
       'translation.missing': '未翻译',
@@ -385,6 +408,7 @@
       'error.SERVER_ERROR': '服务器发生错误。',
       'error.NETWORK': '无法连接服务器，请确认 ReciPal 是否已启动。',
       'error.UNKNOWN': '发生错误（{status}）。',
+      'error.DATA_LANGUAGES_REQUIRED': '请至少选择一种数据语言。',
     },
   };
 
@@ -475,7 +499,7 @@
   function pick(value) {
     const loc = toLoc(value);
     if (loc[current]) return { text: loc[current], lang: current, fallback: false };
-    const order = [...LANGUAGES.map((l) => l.code), ...Object.keys(loc)];
+    const order = [...dataLanguages, ...DATA_LANGUAGES.map((l) => l.code), ...Object.keys(loc)];
     for (const code of order) {
       if (loc[code]) return { text: loc[code], lang: code, fallback: true };
     }
@@ -486,17 +510,32 @@
   const allTexts = (value) => Object.values(toLoc(value)).filter(Boolean);
 
   function langLabel(code) {
-    const lang = LANGUAGES.find((l) => l.code === code);
+    const lang = DATA_LANGUAGES.find((l) => l.code === code);
     return lang ? lang.label : code;
   }
 
   function htmlLang(code) {
-    const lang = LANGUAGES.find((l) => l.code === code);
+    const lang = DATA_LANGUAGES.find((l) => l.code === code);
     return lang ? lang.htmlLang : code;
   }
 
+  // ---------- データの言語 ----------
+  // 入力フォームに出す言語。画面の表示言語とは別に選ぶ（例：画面は日本語、データは日本語と英語）
+
+  let dataLanguages = [...DEFAULT_DATA_LANGUAGES];
+
+  // 一覧にある言語だけを、一覧の順に並べて使う
+  function setDataLanguages(codes) {
+    const picked = DATA_LANGUAGES.map((l) => l.code).filter((c) => (codes || []).includes(c));
+    dataLanguages = picked.length ? picked : [...DEFAULT_DATA_LANGUAGES];
+  }
+
+  // 新しく入力するときに最初に選ぶ言語。表示言語がデータの言語にあればそれ、なければ最初のデータの言語
+  const inputLanguage = () => (dataLanguages.includes(current) ? current : dataLanguages[0]);
+
   window.I18N = {
     LANGUAGES,
+    DATA_LANGUAGES,
     CATEGORY_KEYS,
     t,
     has,
@@ -511,6 +550,11 @@
     get language() {
       return current;
     },
+    get dataLanguages() {
+      return [...dataLanguages];
+    },
+    setDataLanguages,
+    inputLanguage,
     onChange: (fn) => listeners.push(fn),
     categoryKey,
     categoryLabel,

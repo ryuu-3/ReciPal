@@ -104,7 +104,7 @@ export const untranslatedTag = () => h('span', { class: 'tag untranslated' }, t(
 // 訳がなく他の言語で代用している場合、その言語の名前はすでに表示しているので並べない
 export function otherNames(loc) {
   const shown = I18N.pick(loc).lang;
-  return I18N.LANGUAGES
+  return I18N.DATA_LANGUAGES
     .filter((l) => l.code !== I18N.language && l.code !== shown && loc && loc[l.code])
     .map((l) => `${l.label}: ${loc[l.code]}`)
     .join(' / ');
@@ -182,6 +182,7 @@ export function closeOnBackdropClick(dialog) {
 // ---------- 多言語入力欄 ----------
 // 翻訳する入力欄は .lang-pane[data-lang] で包み、入力中の言語の欄だけを表示する。
 // [data-lang-group] の中で data-field が同じ欄どうしが、同じ項目の各言語版になる。
+// 設定で選んでいない言語の欄も、隠したまま作っておく（その言語のデータを保存時に消さないため）
 
 // 1 言語分の入力欄。placeholder は LangEditor.refreshPlaceholders() で設定する
 export function langInput(field, lang, value, { max, multiline = false, rows = 2, ph }) {
@@ -211,17 +212,18 @@ export class LangEditor {
   // nameGroup / nameField：名前が未入力の言語のタブに印を付けるための入力欄
   constructor({ form, tabs, nameGroup, nameField, incompleteKey = 'form.incompleteName', onChange = null }) {
     Object.assign(this, { form, tabs, nameGroup, nameField, incompleteKey, onChange });
-    this.lang = I18N.language;
+    this.lang = I18N.inputLanguage();
     nameGroup.addEventListener('input', () => this.renderTabs());
   }
 
   reset() {
-    this.lang = I18N.language;
+    this.lang = I18N.inputLanguage();
   }
 
-  // 全言語分の入力欄を lang-pane に包んで返す。build(lang) が各言語の中身を作る
+  // 全言語分の入力欄を lang-pane に包んで返す。build(lang) が各言語の中身を作る。
+  // 設定で選んでいない言語の欄はタブを出さず、常に隠しておく
   panes(build) {
-    return I18N.LANGUAGES.map((l) => {
+    return I18N.DATA_LANGUAGES.map((l) => {
       const pane = h('div', { class: 'lang-pane', 'data-lang': l.code });
       pane.append(...[].concat(build(l.code)));
       pane.hidden = l.code !== this.lang;
@@ -246,7 +248,7 @@ export class LangEditor {
   renderTabs() {
     const names = collectLoc(this.nameGroup, this.nameField);
     this.tabs.replaceChildren(
-      ...I18N.LANGUAGES.map((l) => {
+      ...I18N.DATA_LANGUAGES.filter((l) => I18N.dataLanguages.includes(l.code)).map((l) => {
         const active = l.code === this.lang;
         const incomplete = !names[l.code];
         return h('button', {
@@ -275,19 +277,22 @@ export class LangEditor {
 
 // ---------- データストア ----------
 
-export const store = { recipes: [], ingredients: [], tags: [], shopping: { recipes: [], items: [] } };
+export const store = { recipes: [], ingredients: [], tags: [], shopping: { recipes: [], items: [] }, settings: null };
 const storeListeners = [];
 export const onStoreChange = (fn) => storeListeners.push(fn);
 const notifyStore = () => storeListeners.forEach((fn) => fn());
 
 export async function reloadAll() {
   try {
-    const [recipes, ingredients, tags, shopping] = await Promise.all([
+    const [recipes, ingredients, tags, shopping, settings] = await Promise.all([
       api('/api/recipes'),
       api('/api/ingredients'),
       api('/api/tags'),
       api('/api/shopping'),
+      api('/api/settings'),
     ]);
+    store.settings = settings;
+    I18N.setDataLanguages(settings.dataLanguages);
     // 以前の表示名で保存されたカテゴリもキーにそろえる
     store.recipes = recipes.map((r) => ({ ...r, category: I18N.categoryKey(r.category) }));
     store.ingredients = ingredients;

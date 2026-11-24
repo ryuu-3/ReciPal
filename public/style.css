@@ -120,6 +120,13 @@ main {
 }
 .nav-badge[hidden] { display: none; }
 .shopping-button { padding: 6px 12px; }
+.header-tools { display: flex; align-items: center; gap: 4px; }
+.settings-button { font-size: 1.15rem; line-height: 1; }
+
+/* ---------- 設定 ---------- */
+.settings-languages { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.recipe-form .settings-language { display: flex; flex-wrap: wrap; gap: 8px; font-weight: normal; }
+.settings-language .muted { margin: 0; font-size: 0.8rem; }
 
 /* 右からスライドして開くパネル（<dialog> を画面右端に固定） */
 dialog.drawer {
