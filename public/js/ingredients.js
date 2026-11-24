@@ -108,7 +108,7 @@ function usedInText(group) {
     .map((id) => store.recipes.find((r) => r.id === id))
     .filter(Boolean)
     .map((r) => I18N.text(r.title));
-  return `${t('ingredient.importUsedIn', { list: titles.join('、') })}（${t('ingredient.importRows', { n: group.rows })}）`;
+  return t('ingredient.importUsedIn', { list: titles.join(t('common.listSeparator')), n: group.rows });
 }
 
 function importItem(group, checked) {
