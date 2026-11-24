@@ -193,8 +193,8 @@ export function render() {
   el.clearAllBtn.disabled = items.length === 0;
   el.count.hidden = items.length === 0;
   el.count.textContent = t('shopping.count', { n: uncheckedCount() });
-  // 入力候補は表示中の言語の材料名
-  el.itemName.setAttribute('list', `ingredient-options-${I18N.language}`);
+  // 入力候補は入力に使う言語（表示言語がデータの言語になければ最初のデータの言語）の材料名
+  el.itemName.setAttribute('list', `ingredient-options-${I18N.inputLanguage()}`);
 }
 
 // ---------- パネルの開閉 ----------
@@ -228,7 +228,7 @@ async function addManualItem(event) {
     return;
   }
   const master = findIngredientByName(text);
-  const lang = I18N.language;
+  const lang = I18N.inputLanguage();
   const ok = await run(() => post('/api/shopping/items', {
     ingredientId: master ? master.id : undefined,
     name: { [lang]: text },

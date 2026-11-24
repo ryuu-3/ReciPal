@@ -67,6 +67,30 @@ async function writeJson(file, data) {
 
 const save = (name, items) => writeJson(dataPath(name), items);
 
+// ---------- 設定 ----------
+// data/settings.json に保存する。ファイルがなければ既定値を使う（以前のデータと同じ日本語・中国語）
+
+const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const DEFAULT_SETTINGS = { dataLanguages: ['ja', 'zh'] };
+
+async function loadSettings() {
+  if (!(await exists(SETTINGS_FILE))) return { ...DEFAULT_SETTINGS };
+  try {
+    return sanitizeSettings(JSON.parse(await fs.readFile(SETTINGS_FILE, 'utf8')));
+  } catch {
+    return { ...DEFAULT_SETTINGS };
+  }
+}
+
+// dataLanguages：入力フォームで使う言語のコード（1 つ以上）
+function sanitizeSettings(body) {
+  requireObject(body);
+  const list = Array.isArray(body.dataLanguages) ? body.dataLanguages : [];
+  const dataLanguages = [...new Set(list.filter((c) => typeof c === 'string' && LANG_KEY.test(c)))].slice(0, MAX_LANGS);
+  if (!dataLanguages.length) throw new HttpError(400, 'DATA_LANGUAGES_REQUIRED', 'データの言語を 1 つ以上選んでください');
+  return { dataLanguages };
+}
+
 // 更新系の処理は 1 つずつ順番に実行する（読み込み → 変更 → 保存 の間に割り込ませない）
 let lock = Promise.resolve();
 function withLock(fn) {
@@ -681,6 +705,14 @@ function checkRequest(req) {
 async function handleApi(req, res, url) {
   if (url.pathname === '/api/health') {
     return sendJson(res, 200, { app: 'ReciPal' });
+  }
+
+  if (url.pathname === '/api/settings') {
+    if (req.method === 'GET') return sendJson(res, 200, await loadSettings());
+    if (req.method !== 'PUT') throw methodNotAllowed();
+    const settings = sanitizeSettings(await readBody(req));
+    await withLock(() => writeJson(SETTINGS_FILE, settings));
+    return sendJson(res, 200, settings);
   }
 
   if (url.pathname === '/api/shopping' || url.pathname.startsWith('/api/shopping/')) {

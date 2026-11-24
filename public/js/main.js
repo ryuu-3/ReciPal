@@ -4,10 +4,11 @@ import * as recipes from './recipes.js';
 import * as ingredients from './ingredients.js';
 import * as tags from './tags.js';
 import * as shopping from './shopping.js';
+import * as settings from './settings.js';
 
 // ナビで切り替える画面。買い物リストは画面ではなく、ヘッダーの 🛒 から開くパネル
 const views = { recipes, ingredients, tags };
-const modules = [recipes, ingredients, tags, shopping];
+const modules = [recipes, ingredients, tags, shopping, settings];
 const DEFAULT_VIEW = 'recipes';
 
 // URL の #recipes / #ingredients / #tags で表示する画面を決める（再読み込みしても同じ画面に戻れる）

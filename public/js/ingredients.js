@@ -99,11 +99,9 @@ export function render() {
 // ---------- レシピからの取り込み ----------
 // 先に取り込み内容を確認画面に出し、チェックしたものだけを取り込む
 
-const langLabel = (code) => (I18N.LANGUAGES.find((l) => l.code === code) || { label: code }).label;
-
 // { ja: "玉ねぎ", zh: "洋葱" } → 「日本語: 玉ねぎ / 简体中文: 洋葱」
-const namesText = (loc) => Object.entries(loc).map(([lang, v]) => `${langLabel(lang)}: ${v}`).join(' / ');
-const aliasesText = (loc) => Object.entries(loc).map(([lang, list]) => `${langLabel(lang)}: ${list.join(', ')}`).join(' / ');
+const namesText = (loc) => Object.entries(loc).map(([lang, v]) => `${I18N.langLabel(lang)}: ${v}`).join(' / ');
+const aliasesText = (loc) => Object.entries(loc).map(([lang, list]) => `${I18N.langLabel(lang)}: ${list.join(', ')}`).join(' / ');
 
 function usedInText(group) {
   const titles = group.recipeIds

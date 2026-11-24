@@ -137,7 +137,7 @@ function renderFilters() {
 // 材料名欄の候補（言語ごと）。別名も候補に出し、選ぶと正式名で紐付く
 function renderIngredientDatalists() {
   el.ingredientDatalists.replaceChildren(
-    ...I18N.LANGUAGES.map((l) => h('datalist', { id: `ingredient-options-${l.code}` },
+    ...I18N.DATA_LANGUAGES.map((l) => h('datalist', { id: `ingredient-options-${l.code}` },
       ...store.ingredients.flatMap((ing) => {
         const name = ing.name[l.code];
         const aliases = (ing.aliases && ing.aliases[l.code]) || [];

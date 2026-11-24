@@ -17,7 +17,10 @@
     <button type="button" id="btn-open-shopping" class="btn shopping-button" data-i18n-title="shopping.open" data-i18n-aria-label="shopping.open">
       🛒 <span data-i18n="nav.shopping"></span><span id="nav-shopping-badge" class="nav-badge" hidden></span>
     </button>
-    <select id="lang-select" class="lang-select" data-i18n-aria-label="app.language" data-i18n-title="app.language"></select>
+    <div class="header-tools">
+      <select id="lang-select" class="lang-select" data-i18n-aria-label="app.language" data-i18n-title="app.language"></select>
+      <button type="button" id="btn-open-settings" class="btn icon settings-button" data-i18n-title="settings.open" data-i18n-aria-label="settings.open">⚙</button>
+    </div>
   </header>
 
   <main>
@@ -330,6 +333,29 @@
 
       <footer class="dialog-footer">
         <button type="button" id="btn-delete-tag" class="btn danger" data-i18n="common.delete"></button>
+        <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
+        <button type="submit" class="btn primary" data-i18n="form.save"></button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- 設定 -->
+  <dialog id="settings-dialog" class="narrow">
+    <form id="settings-form" class="recipe-form" method="dialog" novalidate>
+      <header class="dialog-header">
+        <h2 data-i18n="settings.title"></h2>
+        <button type="button" class="btn icon" data-close data-i18n-aria-label="common.close">✕</button>
+      </header>
+
+      <fieldset>
+        <legend data-i18n="settings.dataLanguages"></legend>
+        <p class="hint" data-i18n="settings.dataLanguagesHint"></p>
+        <div id="settings-data-languages" class="settings-languages"></div>
+      </fieldset>
+
+      <p id="settings-form-error" class="error" hidden></p>
+
+      <footer class="dialog-footer">
         <button type="button" class="btn" data-close data-i18n="form.cancel"></button>
         <button type="submit" class="btn primary" data-i18n="form.save"></button>
       </footer>
