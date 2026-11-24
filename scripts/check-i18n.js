@@ -52,12 +52,18 @@ function checkValue(code, key, value) {
   return ok;
 }
 
+// public/js の中の .js ファイル（フォルダの中も含む）
+function jsFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) return jsFiles(p);
+    return e.name.endsWith('.js') ? [p] : [];
+  });
+}
+
 // HTML・JS で使っている翻訳キー（キーの先頭部分が JSON にあるものだけを対象にする）
 function usedKeys(prefixes) {
-  const files = [
-    path.join(ROOT, 'public', 'index.html'),
-    ...fs.readdirSync(path.join(ROOT, 'public', 'js')).map((f) => path.join(ROOT, 'public', 'js', f)),
-  ];
+  const files = [path.join(ROOT, 'public', 'index.html'), ...jsFiles(path.join(ROOT, 'public', 'js'))];
   const used = new Map();
   for (const file of files) {
     const src = fs.readFileSync(file, 'utf8');

@@ -267,7 +267,14 @@ public/
   i18n/locales/*.json    画面の文言（言語ごと：ja / zh / en）
   js/main.js             画面の切り替え・初期化（ES モジュール）
   js/common.js           API・DOM 部品・多言語入力欄・データストア
-  js/recipes.js          レシピ画面
+  js/recipes/            レシピ画面
+    index.js             初期化・描画・言語の切り替え（各ファイルをまとめ、画面同士をつなぐ）
+    shared.js            画面の状態・要素の参照・入力言語のタブ・バリエーションの表示用の部品
+    list.js              一覧・検索・絞り込み
+    detail.js            詳細・買い物リストへの追加・削除
+    form.js              編集フォームを開く・保存
+    variants.js          編集フォームのバリエーション（タブ・追加・コピー・削除）
+    form-rows.js         材料・手順の行、材料マスタとの紐付け、材料名の入力候補
   js/ingredients.js      材料画面
   js/tags.js             タグ画面
   js/shopping.js         買い物リスト（右から開くパネル）
