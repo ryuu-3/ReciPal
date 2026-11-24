@@ -243,7 +243,21 @@ ReciPal は自分の PC だけで使うアプリなので、次のアクセス�
 
 ```
 ReciPal.bat              ダブルクリックで起動
-server.js                HTTP サーバーと REST API（http / fs / path / crypto のみ）
+server.js                起動（ポートの選択・ブラウザを開く）。中身は server/ にある
+server/                  サーバーの処理（Node.js の標準モジュールのみ）
+  config.js              フォルダの場所・ホスト・ポートなどの設定値
+  http-utils.js          エラー・JSON の返し方・リクエストの読み込み・アクセスの確認
+  files.js               ファイル・フォルダの小さな共通処理
+  text.js                名前の照合などで使う、多言語テキストの共通処理
+  storage.js             データの読み書き（data/*.json）・更新を順番に実行する仕組み
+  backup.js              自動バックアップ
+  validate.js            入力チェック（レシピ・材料・タグ）
+  settings.js            設定（データの言語）
+  ingredient-import.js   レシピからの材料の取り込み
+  migrate.js             起動時のデータの準備・以前の形式からの移行
+  shopping.js            買い物リスト（データと API）
+  api.js                 API の振り分け・レシピ/材料/タグの共通処理・削除時の後始末
+  static.js              画面のファイル（public）を返す
 data/                    保存データ（自動生成）
 backup/                  自動バックアップ（自動生成。保存先は変えられる）
 public/
