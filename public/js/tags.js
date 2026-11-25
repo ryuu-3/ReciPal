@@ -2,7 +2,7 @@
 import {
   t, h, locNode, toast, showFormError, isFallback, untranslatedTag, otherNames,
   saveItem, deleteItem, reloadAll,
-  langInput, collectLoc, isBlankLoc, LangEditor, guardUnsaved,
+  langInput, collectLoc, isBlankLoc, languagesIn, LangEditor, guardUnsaved,
   findTag, tagUsage, sortedTags,
 } from './common.js';
 
@@ -61,7 +61,7 @@ export function render() {
 function openForm(tag = null, type = 'recipe') {
   state.editingId = tag ? tag.id : null;
   state.type = tag ? tag.type : type;
-  langEditor.reset();
+  langEditor.reset(tag && languagesIn(tag.name));
   el.formTitle.dataset.i18n = tag ? 'tag.editTitle' : 'tag.newTitle';
   el.formTitle.textContent = t(el.formTitle.dataset.i18n);
   el.typeLabel.dataset.i18n = TYPE_TEXT[state.type].type;

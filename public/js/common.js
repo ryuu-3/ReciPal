@@ -207,26 +207,43 @@ export function collectLoc(group, field) {
 
 export const isBlankLoc = (loc) => Object.keys(loc).length === 0;
 
+// 多言語テキスト（{ ja: '...', ko: '...' }、別名の { ja: [...] }、旧形式の文字列）に含まれる言語コード。
+// 配列を渡すと、中の多言語テキストをすべて調べる（手順の一覧など）
+export function languagesIn(...values) {
+  const codes = new Set();
+  const visit = (v) => {
+    if (Array.isArray(v)) v.forEach(visit);
+    else if (v) Object.keys(I18N.toLoc(v)).forEach((code) => codes.add(code));
+  };
+  values.forEach(visit);
+  return [...codes];
+}
+
 // フォーム 1 つ分の「入力言語」タブと、言語ごとの入力欄の表示切り替え
 export class LangEditor {
   // nameGroup / nameField：名前が未入力の言語のタブに印を付けるための入力欄
   constructor({ form, tabs, nameGroup, nameField, incompleteKey = 'form.incompleteName', onChange = null }) {
     Object.assign(this, { form, tabs, nameGroup, nameField, incompleteKey, onChange });
     this.lang = I18N.inputLanguage();
+    this.extraLanguages = [];
     nameGroup.addEventListener('input', () => this.renderTabs());
   }
 
-  reset() {
+  // フォームを開くたびに呼ぶ。languages には、開く記録に含まれる言語コード（languagesIn() の結果）を渡す。
+  // 選べる言語の一覧（DATA_LANGUAGES）にない言語は、隠した入力欄を作って値を持たせ、保存しても消えないようにする
+  reset(languages = []) {
     this.lang = I18N.inputLanguage();
+    const known = I18N.DATA_LANGUAGES.map((l) => l.code);
+    this.extraLanguages = (languages || []).filter((code) => !known.includes(code));
   }
 
   // 全言語分の入力欄を lang-pane に包んで返す。build(lang) が各言語の中身を作る。
-  // 設定で選んでいない言語の欄はタブを出さず、常に隠しておく
+  // 設定で選んでいない言語と、一覧にない言語（extraLanguages）の欄はタブを出さず、常に隠しておく
   panes(build) {
-    return I18N.DATA_LANGUAGES.map((l) => {
-      const pane = h('div', { class: 'lang-pane', 'data-lang': l.code });
-      pane.append(...[].concat(build(l.code)));
-      pane.hidden = l.code !== this.lang;
+    return [...I18N.DATA_LANGUAGES.map((l) => l.code), ...this.extraLanguages].map((code) => {
+      const pane = h('div', { class: 'lang-pane', 'data-lang': code });
+      pane.append(...[].concat(build(code)));
+      pane.hidden = code !== this.lang;
       return pane;
     });
   }

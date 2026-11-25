@@ -1,5 +1,5 @@
 // 編集フォーム：開く・保存
-import { t, toast, showFormError, saveItem, reloadAll, collectLoc, isBlankLoc, langInput, guardUnsaved, renderTagPicker, pickedTags } from '../common.js';
+import { t, toast, showFormError, saveItem, reloadAll, collectLoc, isBlankLoc, langInput, languagesIn, guardUnsaved, renderTagPicker, pickedTags } from '../common.js';
 import { state, $, el, langEditor, variantsOf } from './shared.js';
 import { editors, createVariantEditor, collectVariant, renderVariantTabs, selectVariantEditor } from './variants.js';
 import { openDetail } from './detail.js';
@@ -7,7 +7,12 @@ import { openDetail } from './detail.js';
 // variantId を指定すると、そのバリエーションを開いた状態で表示する
 export function openForm(recipe = null, variantId = null) {
   state.editingId = recipe ? recipe.id : null;
-  langEditor.reset();
+  // レシピに含まれるすべての言語（一覧にない言語の値も保存で消さないように）
+  langEditor.reset(recipe && languagesIn(
+    recipe.title,
+    recipe.description,
+    ...variantsOf(recipe).flatMap((v) => [v.label, ...(v.ingredients || []).flatMap((row) => [row.name, row.amount]), ...(v.steps || [])]),
+  ));
   el.formTitle.dataset.i18n = recipe ? 'form.editTitle' : 'form.newTitle';
   el.formTitle.textContent = t(el.formTitle.dataset.i18n);
   el.form.reset();
