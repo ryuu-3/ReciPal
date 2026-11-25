@@ -3,7 +3,7 @@ import {
   t, h, locNode, toast, errorText, showFormError, matchesKeyword, byName,
   isFallback, untranslatedTag, otherNames,
   api, saveItem, deleteItem, reloadAll, store,
-  langInput, collectLoc, isBlankLoc, LangEditor, guardUnsaved,
+  langInput, collectLoc, isBlankLoc, languagesIn, LangEditor, guardUnsaved,
   findIngredient, ingredientAliases, ingredientUsage,
   tagChips, renderTagFilter, renderTagPicker, pickedTags,
 } from './common.js';
@@ -218,7 +218,7 @@ function highlight(ids) {
 
 function openForm(ing = null) {
   state.editingId = ing ? ing.id : null;
-  langEditor.reset();
+  langEditor.reset(ing && languagesIn(ing.name, ing.aliases));
   el.formTitle.dataset.i18n = ing ? 'ingredient.editTitle' : 'ingredient.newTitle';
   el.formTitle.textContent = t(el.formTitle.dataset.i18n);
   el.formError.hidden = true;
